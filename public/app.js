@@ -68,6 +68,8 @@ document.querySelector(".register form").onsubmit = async (e) => {
     .then((data) => {
       success_msg.innerHTML = `<p>Account Create Successfully!</p>`;
       signup_btn.innerText = "Sign Up";
+      wrapper.classList.remove("active");
+      success_msg.innerHTML = ``;
     })
     .catch((err) => {
       console.log(`Account creation unseccessfull!!\nError: ${err.message}`);
