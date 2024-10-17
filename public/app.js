@@ -14,6 +14,8 @@ document.querySelector(".login form").onsubmit = async (e) => {
   e.preventDefault();
   const username = document.getElementById("name").value;
   const password = document.getElementById("password").value;
+  const login_btn = document.getElementById("loginBtn");
+  login_btn.innerText = "Loading...";
 
   const response = await fetch("/login", {
     method: "POST",
@@ -27,9 +29,11 @@ document.querySelector(".login form").onsubmit = async (e) => {
   if (data.token) {
     localStorage.setItem("token", data.token); // Store token for session
     alert("Login successful");
+    login_btn.innerText = "Login";
     // Redirect to dashboard or another page
   } else {
     alert(data.message);
+    login_btn.innerText = "Login";
   }
 };
 
