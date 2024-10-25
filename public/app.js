@@ -2,6 +2,9 @@ const wrapper = document.querySelector(".wrapper");
 const registerLink = document.querySelector(".register-link");
 const loginLink = document.querySelector(".login-link");
 
+//Server url
+const serverUrl = "http://localhost:3001/api";
+
 registerLink.onclick = () => {
   wrapper.classList.add("active");
 };
@@ -17,24 +20,31 @@ document.querySelector(".login form").onsubmit = async (e) => {
   const login_btn = document.getElementById("loginBtn");
   login_btn.innerText = "Loading...";
 
-  const response = await fetch("/login", {
+  const response = await fetch(`${serverUrl}/user/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ email: username, password: password }),
-  });
-
-  const data = await response.json();
-  if (data.token) {
-    localStorage.setItem("token", data.token); // Store token for session
-    alert("Login successful");
-    login_btn.innerText = "Login";
-    // Redirect to dashboard or another page
-  } else {
-    alert(data.message);
-    login_btn.innerText = "Login";
-  }
+    body: JSON.stringify({ name: username, password: password }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      localStorage.setItem("user", data.user);
+      alert("Login successful");
+      login_btn.innerText = "Login";
+      if (data.user.role === "admin") {
+        window.location.href = "admin_dashboard.html";
+      } else if (data.user.role === "teacher") {
+        window.location.href = "teacher_dashboard.html";
+      } else {
+        window.location.href = "student_dashboard.html";
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      login_btn.innerText = "Login";
+      alert("Login failed");
+    });
 };
 
 document.querySelector(".register form").onsubmit = async (e) => {
@@ -52,21 +62,30 @@ document.querySelector(".register form").onsubmit = async (e) => {
   success_msg.innerHTML = "";
   error_msg.innerHTML = "";
 
-  const response = await fetch("/register", {
+  console.log(
+    JSON.stringify({
+      name: signup_username,
+      email: email,
+      password: signup_password,
+      role: role,
+    })
+  );
+  const response = await fetch(`${serverUrl}/user/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      username: signup_username,
-      email,
+      name: signup_username,
+      email: email,
       password: signup_password,
-      role,
+      role: role,
     }),
   })
     .then((res) => res.json())
     .then((data) => {
-      success_msg.innerHTML = `<p>Account Create Successfully!</p>`;
+      console.log(data);
+      success_msg.innerHTML = `<p>Account Created Successfully!</p>`;
       signup_btn.innerText = "Sign Up";
       wrapper.classList.remove("active");
       success_msg.innerHTML = ``;
