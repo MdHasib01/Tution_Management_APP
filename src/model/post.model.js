@@ -20,4 +20,4 @@ const postSchema = new Schema({
   notes: { type: String },
 });
 
-export const Post = model("Post", postSchema);
+export const StudentPost = model("StudentPost", postSchema);

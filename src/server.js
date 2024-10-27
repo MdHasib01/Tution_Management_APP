@@ -38,6 +38,8 @@ conntectDB()
 
 import userRoutes from "./routes/user.routes.js";
 import postRouter from "./routes/post.routes.js";
+import teacherRoutes from "./routes/teacherPost.routes.js";
 
 app.use("/api/user", userRoutes);
-app.use("/api/user", postRouter);
+app.use("/api/student", postRouter);
+app.use("/api/teacher", teacherRoutes);
