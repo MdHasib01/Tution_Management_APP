@@ -1,180 +1,454 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Student Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100">
-
+  </head>
+  <body class="bg-gray-100">
     <nav class="bg-blue-500 p-4 text-white">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-bold">Student Dashboard</h1>
-            <div>
-                <a href="#request-form" class="mx-2">Tutor Request</a>
-                <a href="#tutor-posts" class="mx-2">View Tutors</a>
-                <a href="#messages" class="mx-2">Messages</a>
-                <a href="#profile" class="mx-2">Profile</a>
-                <a href="#notifications" class="mx-2">Notifications</a>
-            </div>
+      <div class="container mx-auto flex justify-between items-center">
+        <h1 class="text-xl font-bold">Student Dashboard</h1>
+        <div>
+          <a href="#request-form" class="mx-2">Tutor Request</a>
+          <a href="#tutor-posts" class="mx-2">View Tutors</a>
+          <a href="#messages" class="mx-2">Messages</a>
+          <a href="#profile" class="mx-2">Profile</a>
+          <a href="#notifications" class="mx-2">Notifications</a>
         </div>
+      </div>
     </nav>
 
     <main class="container mx-auto p-4">
-
-        <section id="request-form" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4">Request a Tutor</h2>
-            <form class="bg-white p-6 rounded-lg shadow-md">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="student-name" class="block text-sm font-medium text-gray-700">Your Name</label>
-                        <input type="text" id="student-name" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required>
-                    </div>
-                    <div>
-                        <label for="contact-details" class="block text-sm font-medium text-gray-700">Contact Details</label>
-                        <input type="text" id="contact-details" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required>
-                    </div>
-                    <div>
-                        <label for="subjects" class="block text-sm font-medium text-gray-700">Preferred Subjects</label>
-                        <input type="text" id="subjects" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required>
-                    </div>
-                    <div>
-                        <label for="availability" class="block text-sm font-medium text-gray-700">Availability</label>
-                        <input type="text" id="availability" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required>
-                    </div>
-                    <div>
-                        <label for="learning-goals" class="block text-sm font-medium text-gray-700">Learning Goals</label>
-                        <textarea id="learning-goals" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required></textarea>
-                    </div>
-                    <div>
-                        <label for="budget" class="block text-sm font-medium text-gray-700">Maximum Budget</label>
-                        <input type="text" id="budget" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                    </div>
-                    <div>
-                        <label for="teaching-style" class="block text-sm font-medium text-gray-700">Preferred Teaching Style</label>
-                        <select id="teaching-style" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                            <option>Online</option>
-                            <option>In-person</option>
-                            <option>Group</option>
-                            <option>Individual</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="notes" class="block text-sm font-medium text-gray-700">Additional Notes</label>
-                        <textarea id="notes" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
-                    </div>
-                </div>
-                <button type="submit" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Submit Request</button>
-            </form>
-        </section>
-
-        <section id="request-status" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4">Tutor Request Status</h2>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <ul class="list-disc list-inside">
-                    <li class="mb-2">Request 1 - <span class="text-yellow-500">Pending</span></li>
-                    <li class="mb-2">Request 2 - <span class="text-green-500">Approved</span></li>
-                    <li class="mb-2">Request 3 - <span class="text-red-500">Rejected</span></li>
-                </ul>
+      <section id="request-form" class="mb-8">
+        <h2 class="text-2xl font-bold mb-4">Request a Tutor</h2>
+        <form id="tutorForm" class="space-y-4">
+          <!-- Name -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label for="name" class="block text-sm font-medium text-gray-700"
+                >Name</label
+              >
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter your name"
+                required
+                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              />
             </div>
-        </section>
 
-        <section id="tutor-posts" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4">Available Tutors</h2>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <div class="mb-4">
-                    <input type="text" placeholder="Search by location or subject" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                </div>
-                <div id="posts" class="space-y-4">
-                    <div class="bg-gray-50 p-4 rounded-lg shadow">
-                        <h3 class="text-xl font-semibold">Subject: Math</h3>
-                        <p>Location: khulna</p>
-                        <p>Availability: Mon-Fri, 10 AM - 4 PM</p>
-                        <button class="mt-2 bg-blue-500 text-white py-1 px-2 rounded-md hover:bg-blue-600">Contact Tutor</button>
-                    </div>
-
-
-                </div>
+            <!-- Subjects -->
+            <div>
+              <label
+                for="subjects"
+                class="block text-sm font-medium text-gray-700"
+                >Subjects</label
+              >
+              <input
+                type="text"
+                id="subjects"
+                name="subjects"
+                placeholder="Enter the subjects"
+                required
+                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              />
             </div>
-        </section>
-
-        <section id="messages" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4">Message Admin</h2>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <form id="message-form">
-                    <div>
-                        <textarea placeholder="Type your message here..." class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required></textarea>
-                    </div>
-                    <div class="mt-4">
-                        <label for="attachments" class="block text-sm font-medium text-gray-700">Attach Files</label>
-                        <input type="file" id="attachments" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                    </div>
-                    <button type="submit" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Send Message</button>
-                </form>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Availability -->
+            <div>
+              <label
+                for="availability"
+                class="block text-sm font-medium text-gray-700"
+                >Availability</label
+              >
+              <input
+                type="text"
+                id="availability"
+                name="availability"
+                placeholder="Enter your availability"
+                required
+                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              />
             </div>
-        </section>
 
-        <section id="profile" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4">Profile Management</h2>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <form id="profile-form">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label for="profile-name" class="block text-sm font-medium text-gray-700">Name</label>
-                            <input type="text" id="profile-name" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required>
-                        </div>
-                        <div>
-                            <label for="profile-email" class="block text-sm font-medium text-gray-700">Email</label>
-                            <input type="email" id="profile-email" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required>
-                        </div>
-                        <div>
-                            <label for="profile-phone" class="block text-sm font-medium text-gray-700">Phone</label>
-                            <input type="tel" id="profile-phone" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                        </div>
-                        <div>
-                            <label for="learning-goals" class="block text-sm font-medium text-gray-700">Learning Goals</label>
-                            <textarea id="profile-goals" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
-                        </div>
-                    </div>
-                    <button type="submit" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Update Profile</button>
-                </form>
+            <!-- Learning Goals -->
+            <div>
+              <label
+                for="learningGoals"
+                class="block text-sm font-medium text-gray-700"
+                >Learning Goals</label
+              >
+              <input
+                type="text"
+                id="learningGoals"
+                name="learningGoals"
+                placeholder="What are your learning goals?"
+                required
+                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              />
             </div>
-        </section>
+          </div>
 
-        <section id="calendar" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4">Tuition Calendar</h2>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <p class="mb-4">Here you can integrate a calendar for scheduling tuition sessions. You could use Google Calendar API for syncing sessions.</p>
-                <button class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Sync with Google Calendar</button>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Budget -->
+            <div>
+              <label
+                for="budget"
+                class="block text-sm font-medium text-gray-700"
+                >Budget (Optional)</label
+              >
+              <input
+                type="text"
+                id="budget"
+                name="budget"
+                placeholder="Your budget (optional)"
+                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              />
             </div>
-        </section>
 
-        <section id="payments" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4">Payment Information</h2>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <p>Here you can manage payment methods and view payment statuses. You can integrate PayPal or Stripe for managing payments.</p>
-                <button class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Manage Payment Methods</button>
+            <!-- Teaching Style -->
+            <div>
+              <label
+                for="teachingStyle"
+                class="block text-sm font-medium text-gray-700"
+                >Teaching Style</label
+              >
+              <input
+                type="text"
+                id="teachingStyle"
+                name="teachingStyle"
+                placeholder="Preferred teaching style"
+                required
+                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              />
             </div>
-        </section>
+          </div>
 
-        <section id="reviews" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4">Tutor Reviews and Progress</h2>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <p>Here you can review your tutors and track your academic progress.</p>
-                <button class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Write a Review</button>
+          <!-- Additional Notes -->
+          <div>
+            <label for="notes" class="block text-sm font-medium text-gray-700"
+              >Additional Notes</label
+            >
+            <textarea
+              id="notes"
+              name="notes"
+              placeholder="Any additional information"
+              rows="4"
+              class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            ></textarea>
+          </div>
+
+          <!-- Submit Button -->
+          <div>
+            <button
+              type="submit"
+              class="w-[200px] bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300"
+            >
+              Submit Request
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section id="request-status" class="mb-8">
+        <h2 class="text-2xl font-bold mb-4">Tutor Request Status</h2>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <ul class="list-disc list-inside">
+            <li class="mb-2">
+              Request 1 - <span class="text-yellow-500">Pending</span>
+            </li>
+            <li class="mb-2">
+              Request 2 - <span class="text-green-500">Approved</span>
+            </li>
+            <li class="mb-2">
+              Request 3 - <span class="text-red-500">Rejected</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="available-tutors" class="mb-8">
+        <h2 class="text-2xl font-bold mb-4">Available Tutors</h2>
+
+        <!-- Search Teacher Section -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-bold mb-4">Search Teacher by Location</h3>
+          <div class="mb-4">
+            <input
+              type="text"
+              id="location"
+              placeholder="Enter location"
+              class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            />
+            <button
+              id="searchBtn"
+              class="mt-2 w-[200px] bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300"
+            >
+              Search Teacher
+            </button>
+          </div>
+
+          <!-- Teacher Cards Container -->
+          <div
+            id="teacherCards"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+          ></div>
+        </div>
+      </section>
+
+      <section id="messages" class="mb-8">
+        <h2 class="text-2xl font-bold mb-4">Message Admin</h2>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <form id="message-form">
+            <div>
+              <textarea
+                placeholder="Type your message here..."
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                required
+              ></textarea>
             </div>
-        </section>
-
-        <section id="forum" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4">Community Forum</h2>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <p>Join discussions, share resources, and connect with other students in the community forum.</p>
-                <button class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Visit Forum</button>
+            <div class="mt-4">
+              <label
+                for="attachments"
+                class="block text-sm font-medium text-gray-700"
+                >Attach Files</label
+              >
+              <input
+                type="file"
+                id="attachments"
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+              />
             </div>
-        </section>
+            <button
+              type="submit"
+              class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
+      </section>
 
+      <section id="profile" class="mb-8">
+        <h2 class="text-2xl font-bold mb-4">Profile Management</h2>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <form id="profile-form">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label
+                  for="profile-name"
+                  class="block text-sm font-medium text-gray-700"
+                  >Name</label
+                >
+                <input
+                  type="text"
+                  id="profile-name"
+                  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  for="profile-email"
+                  class="block text-sm font-medium text-gray-700"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  id="profile-email"
+                  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  for="profile-phone"
+                  class="block text-sm font-medium text-gray-700"
+                  >Phone</label
+                >
+                <input
+                  type="tel"
+                  id="profile-phone"
+                  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+              </div>
+              <div>
+                <label
+                  for="learning-goals"
+                  class="block text-sm font-medium text-gray-700"
+                  >Learning Goals</label
+                >
+                <textarea
+                  id="profile-goals"
+                  rows="3"
+                  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                ></textarea>
+              </div>
+            </div>
+            <button
+              type="submit"
+              class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+            >
+              Update Profile
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <section id="calendar" class="mb-8">
+        <h2 class="text-2xl font-bold mb-4">Tuition Calendar</h2>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <p class="mb-4">
+            Here you can integrate a calendar for scheduling tuition sessions.
+            You could use Google Calendar API for syncing sessions.
+          </p>
+          <button
+            class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+          >
+            Sync with Google Calendar
+          </button>
+        </div>
+      </section>
+
+      <section id="payments" class="mb-8">
+        <h2 class="text-2xl font-bold mb-4">Payment Information</h2>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <p>
+            Here you can manage payment methods and view payment statuses. You
+            can integrate PayPal or Stripe for managing payments.
+          </p>
+          <button
+            class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+          >
+            Manage Payment Methods
+          </button>
+        </div>
+      </section>
+
+      <section id="reviews" class="mb-8">
+        <h2 class="text-2xl font-bold mb-4">Tutor Reviews and Progress</h2>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <p>
+            Here you can review your tutors and track your academic progress.
+          </p>
+          <button
+            class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+          >
+            Write a Review
+          </button>
+        </div>
+      </section>
+
+      <section id="forum" class="mb-8">
+        <h2 class="text-2xl font-bold mb-4">Community Forum</h2>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <p>
+            Join discussions, share resources, and connect with other students
+            in the community forum.
+          </p>
+          <button
+            class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+          >
+            Visit Forum
+          </button>
+        </div>
+      </section>
     </main>
+    <script>
+      document
+        .getElementById("tutorForm")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault(); // Prevent the form from submitting normally
 
-</body>
+          const formData = {
+            name: document.getElementById("name").value,
+            subjects: document.getElementById("subjects").value,
+            availability: document.getElementById("availability").value,
+            learningGoals: document.getElementById("learningGoals").value,
+            budget: document.getElementById("budget").value,
+            teachingStyle: document.getElementById("teachingStyle").value,
+            notes: document.getElementById("notes").value,
+          };
+
+          try {
+            const response = await fetch(
+              "http://localhost:3001/api/student/post_request",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+              }
+            );
+
+            if (response.ok) {
+              const result = await response.json();
+              console.log("Success:", result);
+              alert("Form submitted successfully!");
+            } else {
+              console.error("Error submitting form");
+              alert("Failed to submit form.");
+            }
+          } catch (error) {
+            console.error("Error:", error);
+            alert("An error occurred.");
+          }
+        });
+      document
+        .getElementById("searchBtn")
+        .addEventListener("click", async function () {
+          const location = document.getElementById("location").value;
+
+          // Clear previous results
+          const teacherCards = document.getElementById("teacherCards");
+          teacherCards.innerHTML = "";
+
+          if (!location) {
+            alert("Please enter a location.");
+            return;
+          }
+
+          try {
+            // Fetch matching teachers from API
+            const response = await fetch(
+              `http://localhost:3001/api/teacher/location?location=${location}`
+            );
+
+            if (response.ok) {
+              const teachers = await response.json();
+
+              if (teachers.length > 0) {
+                // Display each teacher in a card
+                teachers.forEach((teacher) => {
+                  const teacherCard = `
+                                <div class="bg-white p-4 rounded-lg shadow-md hover:bg-blue-100 transition duration-300">
+                                    <h3 class="text-lg font-bold text-gray-800">${teacher.name}</h3>
+                                    <p class="text-sm text-gray-600">Subject: ${teacher.subjects}</p>
+                                    <p class="text-sm text-gray-600">Location: ${teacher.location}</p>
+                                    <p class="text-sm text-gray-600">Availability: ${teacher.availability}</p>
+                                    <p class="text-sm text-gray-600">Teaching Style: ${teacher.teachingStyle}</p>
+                                </div>
+                            `;
+                  teacherCards.insertAdjacentHTML("beforeend", teacherCard);
+                });
+              } else {
+                // If no teachers found, display a message
+                teacherCards.innerHTML = `<p class="text-red-500 text-center">No teachers found for this location.</p>`;
+              }
+            } else {
+              console.error("Error fetching teachers:", response.status);
+              alert("Error fetching teachers.");
+            }
+          } catch (error) {
+            console.error("Error:", error);
+            alert("An error occurred.");
+          }
+        });
+    </script>
+  </body>
 </html>
