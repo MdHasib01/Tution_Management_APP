@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-image: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0');
+            background-size: cover;
+            background-position: center;
+        
+        }
+
+       
+
+        .logout-btn {
+            background: linear-gradient(145deg, #17c64c, #e41f8f); /* 3D gradient effect */
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5), inset 0 -5px 10px rgba(0, 0, 0, 0.3); /* Deeper shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-5px) scale(1.1); /* Lift effect */
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5), inset 0 -5px 10px rgba(0, 0, 0, 0.3); /* Deeper shadow */
+            background: linear-gradient(145deg, #fa5aca, #85eb6c); /* Gradient shift for hover */
+        }
+
+        .logout-btn:active {
+            transform: translateY(2px) scale(0.95); /* Press down effect */
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body >
+
+    <nav class="bg-green-300 p-4 text-gray-800">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Admin Dashboard</h1>
+            <div>
+                <a href="#overview" class="mx-2">Overview</a>
+                <a href="#user-management" class="mx-2">User Management</a>
+                <a href="#requests" class="mx-2">Tuition Requests</a>
+                <a href="#payments" class="mx-2">Payments</a>
+                <a href="#messages" class="mx-2">Messages</a>
+                <a href="#reviews" class="mx-2">Reviews</a>
+                <a href="#reports" class="mx-2">Reports</a>
+                <button id="logoutBtn" class="logout-btn mx-2">Logout</button>
+
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-4">
+
+        <section id="overview" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-cyan-50 ">Overview</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:bg-purple-500 hover:shadow-lg hover:scale-105 transition duration-300 ease-in-out hover:text-fuchsia-500">
+                    <h3 class="text-xl font-bold text-rose-600">Total Students</h3>
+                    <p class="text-3xl font-semibold text-blue-100">120</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:bg-blue-500 hover:shadow-lg hover:scale-105 transition duration-300 ease-in-out hover:text-fuchsia-500">
+                    <h3 class="text-xl font-bold text-rose-600">Total Tutors</h3>
+                    <p class="text-3xl font-semibold text-blue-100 ">45</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:bg-green-500 hover:shadow-lg hover:scale-105 transition duration-300 ease-in-out hover:text-fuchsia-500">
+                    <h3 class="text-xl font-bold text-rose-600">Total Requests</h3>
+                    <p class="text-3xl font-semibold text-blue-100">300</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md col-span-3">
+                    <h3 class="text-xl font-bold mb-2">Student & Tutor Distribution</h3>
+                    <!-- Resize the pie chart using Tailwind classes -->
+                    <div class="w-98 h-120">
+                        <canvas id="pieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Other Sections... -->
+        <section id="user-management" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-cyan-50  ">User Management</h2>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <table class="min-w-full table-auto">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-2">Name</th>
+                            <th class="px-4 py-2">Role</th>
+                            <th class="px-4 py-2">Email</th>
+                            <th class="px-4 py-2">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border px-4 py-2">Raihan</td>
+                            <td class="border px-4 py-2">Student</td>
+                            <td class="border px-4 py-2">raihan@example.com</td>
+                            <td class="border px-4 py-2">
+                                <button class="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-600">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border px-4 py-2">Karim</td>
+                            <td class="border px-4 py-2">Tutor</td>
+                            <td class="border px-4 py-2">karim@example.com</td>
+                            <td class="border px-4 py-2">
+                                <button class="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-600">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="requests" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-cyan-50  ">Tuition Request Management</h2>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <table class="min-w-full table-auto">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-2">Student Name</th>
+                            <th class="px-4 py-2">Subject</th>
+                            <th class="px-4 py-2">Status</th>
+                            <th class="px-4 py-2">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border px-4 py-2">Raihan</td>
+                            <td class="border px-4 py-2">Math</td>
+                            <td class="border px-4 py-2">Pending</td>
+                            <td class="border px-4 py-2">
+                                <button class="bg-green-500 text-white py-1 px-2 rounded-md hover:bg-green-600">Approve</button>
+                                <button class="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-600">Reject</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="payments" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-cyan-50  ">Payment Management</h2>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <table class="min-w-full table-auto">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-2">Transaction ID</th>
+                            <th class="px-4 py-2">Amount</th>
+                            <th class="px-4 py-2">Status</th>
+                            <th class="px-4 py-2">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border px-4 py-2">TX123456</td>
+                            <td class="border px-4 py-2">150tk</td>
+                            <td class="border px-4 py-2">Completed</td>
+                            <td class="border px-4 py-2">
+                                <button class="bg-gray-500 text-white py-1 px-2 rounded-md hover:bg-gray-600">View Invoice</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="messages" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-cyan-50  ">Messaging System</h2>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <table class="min-w-full table-auto">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-2">Sender</th>
+                            <th class="px-4 py-2">Message</th>
+                            <th class="px-4 py-2">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border px-4 py-2">Raihan</td>
+                            <td class="border px-4 py-2">I need help with my tutor request.</td>
+                            <td class="border px-4 py-2">
+                                <button class="bg-blue-500 text-white py-1 px-2 rounded-md hover:bg-blue-600">Reply</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="reviews" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-cyan-50  ">Feedback and Reviews</h2>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <table class="min-w-full table-auto">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-2">Tutor Name</th>
+                            <th class="px-4 py-2">Rating</th>
+                            <th class="px-4 py-2">Feedback</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border px-4 py-2">Karim</td>
+                            <td class="border px-4 py-2">5/5</td>
+                            <td class="border px-4 py-2">Excellent tutor, very helpful.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Reporting and Analytics -->
+        <section id="reports" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-cyan-50  ">Complain</h2>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <p>Generate reports on platform usage, revenue, and performance.</p>
+                <button class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Generate Report</button>
+            </div>
+        </section>
+
+
+    </main>
+
+    <script>
+        // Function to handle the logout button click and redirect
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            // Redirect to homepage or logout page
+            window.location.href = 'index.html'; // Replace with the correct logout URL
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const ctx = document.getElementById('pieChart').getContext('2d');
+            const pieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Students with Tutor', 'Students without Tutor', 'Tutors with Tuitions', 'Tutors without Tuitions'],
+                    datasets: [{
+                        label: 'Distribution',
+                        data: [80, 40, 35, 10], // Example data
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false, // Adjusts the aspect ratio to fit the container
+                    plugins: {
+                        legend: {
+                            position:'left', // Set to 'top', 'bottom', 'left', or 'right'
+                            labels: {
+                                font: {
+                                    size: 18 // Change font size here
+                                },
+                                padding: 35, // Adjust spacing between the labels
+                            }
+                        },
+                        tooltip: {
+                            enabled: true,
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    return tooltipItem.label + ': ' + tooltipItem.raw + ' students/tutors';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
