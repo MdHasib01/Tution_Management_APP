@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (response.ok) {
           const teachers = await response.json();
+          console.log("Teachers:", teachers);
           teacherCards.innerHTML = ""; // Clear previous results
 
           if (teachers.length > 0) {
@@ -64,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (response.ok) {
         const students = await response.json();
+        console.log("Students:", students);
 
         if (students.length > 0) {
           students.forEach((student) => {
@@ -112,6 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (response.ok) {
         const teachers = await response.json();
+        console.log("Teachers:", teachers);
 
         if (teachers.length > 0) {
           teachers.forEach((teacher) => {

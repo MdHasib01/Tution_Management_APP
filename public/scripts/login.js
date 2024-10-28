@@ -29,7 +29,9 @@ document.querySelector(".login form").onsubmit = async (e) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      localStorage.setItem("user", data.user);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      console.log(data.user);
       alert("Login successful");
       login_btn.innerText = "Login";
       if (data.user.role === "admin") {

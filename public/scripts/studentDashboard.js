@@ -88,3 +88,9 @@ document
       alert("An error occurred.");
     }
   });
+
+//logout
+document.getElementById("logout").addEventListener("click", function () {
+  localStorage.clear();
+  window.location.href = "index.html";
+});
