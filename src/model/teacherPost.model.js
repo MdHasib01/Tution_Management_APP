@@ -14,7 +14,7 @@ const teacherPostSchema = new Schema({
     type: String,
   },
   availabilDays: {
-    type: String,
+    type: [String],
     enum: [
       "Monday",
       "Tuesday",

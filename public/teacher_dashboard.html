@@ -1,166 +1,314 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tutor Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100">
-
+  </head>
+  <body class="bg-gray-100">
     <nav class="bg-green-500 p-4 text-white">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-bold">Tutor Dashboard</h1>
-            <div>
-                <a href="#tutor-requests" class="mx-2">Tutor Requests</a>
-                <a href="#messages" class="mx-2">Messages</a>
-                <a href="#profile" class="mx-2">Profile</a>
-                <a href="#notifications" class="mx-2">Notifications</a>
-            </div>
+      <div class="container mx-auto flex justify-between items-center">
+        <h1 class="text-xl font-bold">Tutor Dashboard</h1>
+        <div>
+          <a href="#tutor-requests" class="mx-2">Tutor Requests</a>
+          <a href="#messages" class="mx-2">Messages</a>
+          <a href="#profile" class="mx-2">Profile</a>
+          <a href="#notifications" class="mx-2">Notifications</a>
         </div>
+      </div>
     </nav>
 
     <main class="container mx-auto p-4">
-
-        <section id="tutor-requests" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4">Tutor Requests</h2>
-            <div id="tutor-requests-list" class="bg-white p-6 rounded-lg shadow-md">
-                <!-- Tutor requests will be displayed here -->
+      <section id="request-form" class="mb-8">
+        <h2 class="text-2xl font-bold mb-4">Tuition Request Submission</h2>
+        <form id="profile-form" class="bg-white p-6 rounded-lg shadow-lg">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Name -->
+            <div>
+              <input
+                type="text"
+                id="name"
+                placeholder="Tutor's Name"
+                class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                required
+              />
             </div>
-        </section>
 
-        <section id="request-form" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4">Tuition Request Submission</h2>
-            <form class="bg-white p-4 rounded shadow-md">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700">Tutor's Name</label>
-                        <input type="text" id="name" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required>
-                    </div>
-                    <div>
-                        <label for="contact" class="block text-sm font-medium text-gray-700">Contact Details</label>
-                        <input type="text" id="contact" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required>
-                    </div>
-                    <div>
-                        <label for="subject" class="block text-sm font-medium text-gray-700">Subject Expertise</label>
-                        <input type="text" id="subject" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required>
-                    </div>
-                    <div>
-                        <label for="availability" class="block text-sm font-medium text-gray-700">Availability</label>
-                        <input type="text" id="availability" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required>
-                    </div>
-                    <div>
-                        <label for="location" class="block text-sm font-medium text-gray-700">Preferred Location</label>
-                        <input type="text" id="location" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                    </div>
-                    <div>
-                        <label for="experience" class="block text-sm font-medium text-gray-700">Experience and Qualifications</label>
-                        <textarea id="experience" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
-                    </div>
-                    <div>
-                        <label for="rate" class="block text-sm font-medium text-gray-700">Rate</label>
-                        <input type="text" id="rate" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                    </div>
-                    <div>
-                        <label for="teaching-style" class="block text-sm font-medium text-gray-700">Teaching Style</label>
-                        <select id="teaching-style" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                            <option>Online</option>
-                            <option>In-person</option>
-                            <option>Group</option>
-                            <option>Individual</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="notes" class="block text-sm font-medium text-gray-700">Additional Notes</label>
-                        <textarea id="notes" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
-                    </div>
-                </div>
-                <button type="submit" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Submit Request</button>
-            </form>
-        </section>
-
-        <section id="request-status" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4">Tuition Request Status</h2>
-            <div class="bg-white p-4 rounded shadow-md">
-                <ul class="list-disc list-inside">
-                    <li class="mb-2">Request 1 - Pending</li>
-                    <li class="mb-2">Request 2 - Approved</li>
-                    <li class="mb-2">Request 3 - Rejected</li>
-                </ul>
-
+            <!-- Phone -->
+            <div>
+              <input
+                type="tel"
+                id="phone"
+                placeholder="Phone"
+                class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                required
+              />
             </div>
-        </section>
 
-        <section id="student-posts" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4">Student Post Feed</h2>
-            <div class="bg-white p-4 rounded shadow-md">
-                <div class="mb-4">
-                    <label for="filters" class="block text-sm font-medium text-gray-700">Filters</label>
-                    <input type="text" id="filters" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Search posts...">
-                </div>
-                <div class="space-y-4">
-                    <div class="bg-gray-50 p-4 rounded shadow-md">
-                        <h3 class="text-xl font-semibold">Post Title</h3>
-                        <p class="text-gray-600">Location: Khulna</p>
-                        <p class="text-gray-600">Subject: Math</p>
-                        <button class="mt-2 bg-blue-500 text-white py-1 px-2 rounded-md hover:bg-blue-600">Respond</button>
-                    </div>
-
-                </div>
+            <!-- Email -->
+            <div>
+              <input
+                type="email"
+                id="email"
+                placeholder="Email"
+                class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                required
+              />
             </div>
-        </section>
 
-        <section id="messages" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4">Admin Messaging</h2>
-            <div class="bg-white p-4 rounded shadow-md">
-                <form>
-                    <div>
-                        <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
-                        <textarea id="message" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
-                    </div>
-                    <div class="mt-4">
-                        <label for="attachments" class="block text-sm font-medium text-gray-700">Attach Files</label>
-                        <input type="file" id="attachments" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                    </div>
-                    <button type="submit" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Send Message</button>
-                </form>
+            <!-- Subject Expertise -->
+            <div>
+              <input
+                type="text"
+                id="subjectExpertise"
+                placeholder="Subject Expertise"
+                class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                required
+              />
             </div>
-        </section>
 
-        <section id="profile-update" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4">Update Your Profile</h2>
-            <form action="/update-profile" method="POST" id="profile-update-form">
-                <input type="hidden" name="role" value="tutor">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="update-name" class="block text-sm font-medium text-gray-700">Your Name</label>
-                        <input type="text" name="name" id="update-name" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                    </div>
-                    <div>
-                        <label for="update-email" class="block text-sm font-medium text-gray-700">Email</label>
-                        <input type="email" name="email" id="update-email" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                    </div>
-                    <div>
-                        <label for="update-contact" class="block text-sm font-medium text-gray-700">Contact Number</label>
-                        <input type="text" name="contactNumber" id="update-contact" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                    </div>
-                </div>
-                <button type="submit" class="mt-4 bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600">Update Profile</button>
-            </form>
-        </section>
-        
+            <!-- Available Days -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2"
+                >Available Days</label
+              >
+              <div class="mt-1">
+                <label class="inline-block mr-4"
+                  ><input type="checkbox" name="availabilDays" value="Monday" />
+                  Monday</label
+                >
+                <label class="inline-block mr-4"
+                  ><input
+                    type="checkbox"
+                    name="availabilDays"
+                    value="Tuesday"
+                  />
+                  Tuesday</label
+                >
+                <label class="inline-block mr-4"
+                  ><input
+                    type="checkbox"
+                    name="availabilDays"
+                    value="Wednesday"
+                  />
+                  Wednesday</label
+                >
+                <label class="inline-block mr-4"
+                  ><input
+                    type="checkbox"
+                    name="availabilDays"
+                    value="Thursday"
+                  />
+                  Thursday</label
+                >
+                <label class="inline-block mr-4"
+                  ><input type="checkbox" name="availabilDays" value="Friday" />
+                  Friday</label
+                >
+                <label class="inline-block mr-4"
+                  ><input
+                    type="checkbox"
+                    name="availabilDays"
+                    value="Saturday"
+                  />
+                  Saturday</label
+                >
+                <label class="inline-block"
+                  ><input type="checkbox" name="availabilDays" value="Sunday" />
+                  Sunday</label
+                >
+              </div>
+            </div>
 
+            <!-- Preferred Location -->
+            <div>
+              <input
+                type="text"
+                id="preferedLocation"
+                placeholder="Preferred Location"
+                class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                required
+              />
+            </div>
+
+            <!-- Experience -->
+            <div>
+              <textarea
+                id="experience"
+                placeholder="Experience"
+                rows="3"
+                class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                required
+              ></textarea>
+            </div>
+
+            <!-- Rate -->
+            <div>
+              <input
+                type="text"
+                id="rate"
+                placeholder="Rate"
+                class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                required
+              />
+            </div>
+
+            <!-- Teaching Style -->
+            <div>
+              <select
+                id="teachingStyle"
+                class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                required
+              >
+                <option value="" disabled selected>Teaching Style</option>
+                <option>Online</option>
+                <option>In-person</option>
+                <option>Group</option>
+                <option>Individual</option>
+              </select>
+            </div>
+
+            <!-- Notes -->
+            <div>
+              <textarea
+                id="notes"
+                placeholder="Additional Notes"
+                rows="3"
+                class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              ></textarea>
+            </div>
+
+            <!-- Address -->
+            <div>
+              <input
+                type="text"
+                id="address"
+                placeholder="Address"
+                class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="mt-6 bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 transition-colors"
+          >
+            Submit Request
+          </button>
+        </form>
+      </section>
+      <section id="tutor-requests" class="mb-8">
+        <h2 class="text-2xl font-bold mb-4">Tutor Requests</h2>
+        <div
+          id="tutor-requests-list"
+          class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-lg shadow-md"
+        >
+          <!-- Tutor requests will be displayed here -->
+          <p id="loading-message" class="text-gray-500">Loading requests...</p>
+        </div>
+      </section>
+
+      <section id="request-status" class="mb-8">
+        <h2 class="text-2xl font-bold mb-4">Tuition Request Status</h2>
+        <div class="bg-white p-4 rounded shadow-md">
+          <ul class="list-disc list-inside">
+            <li class="mb-2">Request 1 - Pending</li>
+            <li class="mb-2">Request 2 - Approved</li>
+            <li class="mb-2">Request 3 - Rejected</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="student-posts" class="mb-8">
+        <h2 class="text-2xl font-bold mb-4">Student Post Feed</h2>
+        <div class="bg-white p-4 rounded shadow-md">
+          <div class="mb-4">
+            <label for="filters" class="block text-sm font-medium text-gray-700"
+              >Filters</label
+            >
+            <input
+              type="text"
+              id="filters"
+              class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              placeholder="Search posts..."
+            />
+          </div>
+          <div class="space-y-4">
+            <div class="bg-gray-50 p-4 rounded shadow-md">
+              <h3 class="text-xl font-semibold">Post Title</h3>
+              <p class="text-gray-600">Location: Khulna</p>
+              <p class="text-gray-600">Subject: Math</p>
+              <button
+                class="mt-2 bg-blue-500 text-white py-1 px-2 rounded-md hover:bg-blue-600"
+              >
+                Respond
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="profile-update" class="mb-8">
+        <h2 class="text-2xl font-bold mb-4">Update Your Profile</h2>
+        <form action="/update-profile" method="POST" id="profile-update-form">
+          <input type="hidden" name="role" value="tutor" />
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label
+                for="update-name"
+                class="block text-sm font-medium text-gray-700"
+                >Your Name</label
+              >
+              <input
+                type="text"
+                name="name"
+                id="update-name"
+                required
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              />
+            </div>
+            <div>
+              <label
+                for="update-email"
+                class="block text-sm font-medium text-gray-700"
+                >Email</label
+              >
+              <input
+                type="email"
+                name="email"
+                id="update-email"
+                required
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              />
+            </div>
+            <div>
+              <label
+                for="update-contact"
+                class="block text-sm font-medium text-gray-700"
+                >Contact Number</label
+              >
+              <input
+                type="text"
+                name="contactNumber"
+                id="update-contact"
+                required
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              />
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="mt-4 bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600"
+          >
+            Update Profile
+          </button>
+        </form>
+      </section>
     </main>
 
-    <script>
-        // Fetch tutor requests from the server
-        fetch('/tutor-requests')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('tutor-requests-list').innerHTML = data;
-            })
-            .catch(err => console.error(err));
-    </script>
-
-</body>
+    <script src="./scripts/teacherDashboard.js"></script>
+  </body>
 </html>
