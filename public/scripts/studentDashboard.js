@@ -1,3 +1,7 @@
+const user = JSON.parse(localStorage.getItem("user"))
+
+document.getElementById("studentName").innerHTML= `Welcome ${user.name}`
+
 document
   .getElementById("tutorForm")
   .addEventListener("submit", async function (event) {

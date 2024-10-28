@@ -25,9 +25,9 @@ const registerUser = async (req, res) => {
   }
 };
 const signInUser = async (req, res) => {
-  const { username, password } = req.body;
+  const { name, password } = req.body;
   try {
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ name });
     if (!user) {
       return res.status(404).send("User not found");
     }
