@@ -9,6 +9,10 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  paid: {
+    default: false,
+    type: Boolean,
+  },
   password: {
     type: String,
     required: true,

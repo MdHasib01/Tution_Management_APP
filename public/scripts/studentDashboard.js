@@ -1,6 +1,6 @@
-const user = JSON.parse(localStorage.getItem("user"))
+const user = JSON.parse(localStorage.getItem("user"));
 
-document.getElementById("studentName").innerHTML= `Welcome ${user.name}`
+document.getElementById("studentName").innerHTML = `Welcome ${user.name}`;
 
 document
   .getElementById("tutorForm")
@@ -69,13 +69,27 @@ document
           // Display each teacher in a card
           teachers.forEach((teacher) => {
             const teacherCard = `
-                                <div class="bg-white p-4 rounded-lg shadow-md hover:bg-blue-100 transition duration-300">
-                                    <h3 class="text-lg font-bold text-gray-800">${teacher.name}</h3>
-                                    <p class="text-sm text-gray-600">Subject: ${teacher.subjects}</p>
-                                    <p class="text-sm text-gray-600">Location: ${teacher.location}</p>
-                                    <p class="text-sm text-gray-600">Availability: ${teacher.availability}</p>
-                                    <p class="text-sm text-gray-600">Teaching Style: ${teacher.teachingStyle}</p>
-                                </div>
+                                <div class="bg-white text-black p-6 rounded-lg shadow-md hover:bg-gray-100 transition duration-300">
+                                        <h3 class="text-lg font-bold text-gray-800">${
+                                          teacher.name
+                                        }</h3>
+                                        <p class="text-sm text-gray-600">Subjects: ${
+                                          teacher.subjectExpertise
+                                        }</p>
+                                        <p class="text-sm text-gray-600">Availability: ${
+                                          teacher.availabilDays
+                                        }</p>
+                                       
+                                        <p class="text-sm text-gray-600">Budget: ${
+                                          teacher.rate || "N/A"
+                                        }</p>
+                                        <p class="text-sm text-gray-600">Teaching Style: ${
+                                          teacher.teachingStyle
+                                        }</p>
+                                        <p class="text-sm text-gray-600">Notes: ${
+                                          teacher.notes || "No additional notes"
+                                        }</p>
+                                    </div>
                             `;
             teacherCards.insertAdjacentHTML("beforeend", teacherCard);
           });

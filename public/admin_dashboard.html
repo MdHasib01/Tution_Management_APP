@@ -122,25 +122,21 @@
         </section>
 
         <section id="requests" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4 text-cyan-50  ">Tuition Request Management</h2>
+            <h2 class="text-2xl font-bold mb-4 text-cyan-50  ">Tutor payment approve </h2>
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <table class="min-w-full table-auto">
                     <thead>
                         <tr>
-                            <th class="px-4 py-2">Student Name</th>
-                            <th class="px-4 py-2">Subject</th>
+                            <th class="px-4 py-2">Tutor Name</th>
                             <th class="px-4 py-2">Status</th>
-                            <th class="px-4 py-2">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="border px-4 py-2">Raihan</td>
-                            <td class="border px-4 py-2">Math</td>
-                            <td class="border px-4 py-2">Pending</td>
+                            <td class="border px-4 py-2"></td>
+                            <td class="border px-4 py-2">Unpaid</td>
                             <td class="border px-4 py-2">
-                                <button class="bg-green-500 text-white py-1 px-2 rounded-md hover:bg-green-600">Approve</button>
-                                <button class="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-600">Reject</button>
+                                <button id="payment-approve" class="bg-green-500 text-white py-1 px-2 rounded-md hover:bg-green-600">Payment Ppprove</button>
                             </td>
                         </tr>
                     </tbody>
@@ -240,56 +236,8 @@
         });
     </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const ctx = document.getElementById('pieChart').getContext('2d');
-            const pieChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: ['Students with Tutor', 'Students without Tutor', 'Tutors with Tuitions', 'Tutors without Tuitions'],
-                    datasets: [{
-                        label: 'Distribution',
-                        data: [80, 40, 35, 10], // Example data
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false, // Adjusts the aspect ratio to fit the container
-                    plugins: {
-                        legend: {
-                            position:'left', // Set to 'top', 'bottom', 'left', or 'right'
-                            labels: {
-                                font: {
-                                    size: 18 // Change font size here
-                                },
-                                padding: 35, // Adjust spacing between the labels
-                            }
-                        },
-                        tooltip: {
-                            enabled: true,
-                            callbacks: {
-                                label: function(tooltipItem) {
-                                    return tooltipItem.label + ': ' + tooltipItem.raw + ' students/tutors';
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        });
+    <script src="./scripts/admin.js"></script>
+        
     </script>
 </body>
 </html>

@@ -1,3 +1,11 @@
+const user = JSON.parse(localStorage.getItem("user"));
+document.getElementById("teacherName").innerHTML = `Welcome ${user.name}`;
+if (!user.paid) {
+  document.getElementById("unpaid").classList.remove("hidden");
+}
+if (user.paid) {
+  document.getElementById("unpaid").classList.add("hidden");
+}
 async function fetchTutorRequests() {
   const requestsList = document.getElementById("tutor-requests-list");
   const loadingMessage = document.getElementById("loading-message");
@@ -126,4 +134,10 @@ document.addEventListener("DOMContentLoaded", function () {
       alert("An error occurred. Please check the console for more details.");
     }
   });
+});
+
+//logout
+document.getElementById("logout").addEventListener("click", function () {
+  localStorage.clear();
+  window.location.href = "index.html";
 });

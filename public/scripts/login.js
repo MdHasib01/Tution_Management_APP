@@ -36,7 +36,7 @@ document.querySelector(".login form").onsubmit = async (e) => {
       login_btn.innerText = "Login";
       if (data.user.role === "admin") {
         window.location.href = "admin_dashboard.html";
-      } else if (data.user.role === "teacher") {
+      } else if (data.user.role === "tutor") {
         window.location.href = "teacher_dashboard.html";
       } else {
         window.location.href = "student_dashboard.html";
