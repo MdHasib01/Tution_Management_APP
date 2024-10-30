@@ -33,13 +33,26 @@ document.addEventListener("DOMContentLoaded", function () {
             teachers.forEach((teacher) => {
               const teacherCard = `
                                         <div class="bg-white text-black p-6 rounded-lg shadow-md hover:bg-gray-100 transition duration-300">
-                                            <h3 class="text-lg font-bold text-gray-800">${teacher.name}</h3>
-                                            <p class="text-sm text-gray-600">Subjects: ${teacher.subjects}</p>
-                                            <p class="text-sm text-gray-600">Location: ${teacher.location}</p>
-                                            <p class="text-sm text-gray-600">Availability: ${teacher.availability}</p>
-                                            <p class="text-sm text-gray-600">Experience: ${teacher.experience} years</p>
-                                            <p class="text-sm text-gray-600">Contact: ${teacher.contact}</p>
-                                        </div>
+                                        <h3 class="text-lg font-bold text-gray-800">${
+                                          teacher.name
+                                        }</h3>
+                                        <p class="text-sm text-gray-600">Subjects: ${
+                                          teacher.subjectExpertise
+                                        }</p>
+                                        <p class="text-sm text-gray-600">Availability: ${
+                                          teacher.availabilDays
+                                        }</p>
+                                       
+                                        <p class="text-sm text-gray-600">Budget: ${
+                                          teacher.rate || "N/A"
+                                        }</p>
+                                        <p class="text-sm text-gray-600">Teaching Style: ${
+                                          teacher.teachingStyle
+                                        }</p>
+                                        <p class="text-sm text-gray-600">Notes: ${
+                                          teacher.notes || "No additional notes"
+                                        }</p>
+                                    </div>
                                     `;
               teacherCards.insertAdjacentHTML("beforeend", teacherCard);
             });
@@ -124,16 +137,14 @@ document.addEventListener("DOMContentLoaded", function () {
                                           teacher.name
                                         }</h3>
                                         <p class="text-sm text-gray-600">Subjects: ${
-                                          teacher.subjects
+                                          teacher.subjectExpertise
                                         }</p>
                                         <p class="text-sm text-gray-600">Availability: ${
-                                          teacher.availability
+                                          teacher.availabilDays
                                         }</p>
-                                        <p class="text-sm text-gray-600">Learning Goals: ${
-                                          teacher.learningGoals
-                                        }</p>
+                                       
                                         <p class="text-sm text-gray-600">Budget: ${
-                                          teacher.budget || "N/A"
+                                          teacher.rate || "N/A"
                                         }</p>
                                         <p class="text-sm text-gray-600">Teaching Style: ${
                                           teacher.teachingStyle
