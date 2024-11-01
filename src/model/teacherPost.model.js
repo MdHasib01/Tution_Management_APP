@@ -29,6 +29,7 @@ const teacherPostSchema = new Schema({
     type: String,
   },
   experience: { type: String },
+  response: { type: Boolean, default: false },
   rate: { type: String },
   teachingStyle: { type: String },
   notes: { type: String },
