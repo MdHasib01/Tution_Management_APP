@@ -131,3 +131,51 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Load the payment table on page load
   loadPaymentTable();
 });
+
+async function fetchRespondedTeachers() {
+  try {
+    const response = await fetch("http://localhost:3001/api/teacher/findReq");
+    if (!response.ok) {
+      throw new Error("Failed to fetch responded teachers");
+    }
+    const teachers = await response.json();
+    console.log("Fetched Teachers Data:", teachers); // Log data
+    populateRespondedTeachersTable(teachers);
+  } catch (error) {
+    console.error("Error fetching responded teachers:", error);
+  }
+}
+
+function populateRespondedTeachersTable(teachers) {
+  const tableBody = document.getElementById("respondedTeachersTableBody");
+  tableBody.innerHTML = ""; // Clear previous data
+
+  const teacherList = Array.isArray(teachers) ? teachers : teachers.data; // Adjust as needed
+
+  teacherList.forEach((teacher) => {
+    const subjectExpertise = Array.isArray(teacher.subjectExpertise)
+      ? teacher.subjectExpertise.join(", ")
+      : teacher.subjectExpertise || "N/A";
+
+    const row = `
+            <tr>
+                <td class="border px-4 py-2">${teacher.name || "N/A"}</td>
+                <td class="border px-4 py-2">${subjectExpertise}</td>
+                <td class="border px-4 py-2">${
+                  teacher.preferedLocation || "N/A"
+                }</td>
+                <td class="border px-4 py-2">${teacher.phone || "N/A"}</td>
+                <td class="border px-4 py-2">${teacher.rate || "N/A"}</td>
+            </tr>
+        `;
+    tableBody.insertAdjacentHTML("beforeend", row);
+  });
+}
+
+// Initialize fetch on page load
+document.addEventListener("DOMContentLoaded", fetchRespondedTeachers);
+
+// Logout button functionality
+document.getElementById("logoutBtn").addEventListener("click", function () {
+  window.location.href = "index.html"; // Redirect to the homepage or logout URL
+});

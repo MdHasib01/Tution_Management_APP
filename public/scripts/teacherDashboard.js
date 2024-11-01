@@ -2,9 +2,9 @@ const user = JSON.parse(localStorage.getItem("user"));
 document.getElementById("teacherName").innerHTML = `Welcome ${user.name}`;
 if (!user.paid) {
   document.getElementById("unpaid").classList.remove("hidden");
-}
-if (user.paid) {
+} else {
   document.getElementById("unpaid").classList.add("hidden");
+  document.getElementById("teacherSubmitReq").disabled = false; // Enable button if paid
 }
 async function fetchTutorRequests() {
   const requestsList = document.getElementById("tutor-requests-list");
