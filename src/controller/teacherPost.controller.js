@@ -43,4 +43,31 @@ const getPostsByLocation = async (req, res) => {
   }
 };
 
-export { addTeacherPost, getTeacherPosts, getPostsByLocation };
+const updateResponse = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const post = await TeacherPost.findById(id);
+    post.response = true;
+    post.save();
+    res.status(200).json(post);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+const findResponseTure = async (req, res) => {
+  try {
+    const query = TeacherPost.where({ response: true });
+    const posts = await query.find();
+    res.status(200).json(posts);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+export {
+  addTeacherPost,
+  getTeacherPosts,
+  getPostsByLocation,
+  updateResponse,
+  findResponseTure,
+};
