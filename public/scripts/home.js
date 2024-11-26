@@ -170,3 +170,52 @@ document.addEventListener("DOMContentLoaded", function () {
   fetchStudentRequests();
   fetchteacherRequests();
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const user = localStorage.getItem("user"); // Assuming `user` is a JSON string with role information
+  const navlink = document.getElementById("navLinks");
+
+  // Create the Login/Logout button
+  const authButton = document.createElement("button");
+  authButton.className =
+    "py-2 px-3 bg-yellow-500 hover:bg-yellow-400 text-yellow-900 rounded transition duration-300";
+  authButton.textContent = user ? "Logout" : "Login";
+  navlink.appendChild(authButton);
+
+  // Create the Dashboard button if the user exists
+  if (user) {
+    const dashboardButton = document.createElement("button");
+    dashboardButton.className =
+      "ml-2 py-2 px-3 bg-blue-500 hover:bg-blue-400 text-white rounded transition duration-300";
+    dashboardButton.textContent = "Dashboard";
+    navlink.appendChild(dashboardButton);
+
+    // Parse the user object from localStorage
+    const userData = JSON.parse(user); // Make sure user is stored as a JSON string in localStorage
+
+    // Add click event for the Dashboard button
+    dashboardButton.addEventListener("click", function () {
+      if (userData.role === "student") {
+        window.location.href = "./student_dashboard.html";
+      } else if (userData.role === "teacher") {
+        window.location.href = "./teacher_dashboard.html";
+      } else if (userData.role === "admin") {
+        window.location.href = "./admin_dashboard.html";
+      } else {
+        console.error("Invalid user role:", userData.role);
+        alert("Invalid user role!");
+      }
+    });
+
+    // Add click event for the Logout button
+    authButton.addEventListener("click", function () {
+      localStorage.clear();
+      window.location.href = "./login.html";
+    });
+  } else {
+    // Add click event for the Login button
+    authButton.addEventListener("click", function () {
+      window.location.href = "./login.html";
+    });
+  }
+});
