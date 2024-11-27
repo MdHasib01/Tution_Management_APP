@@ -4,6 +4,7 @@ const addAPost = async (req, res) => {
   const {
     name,
     subjects,
+    email,
     availability,
     learningGoals,
     budget,
@@ -24,6 +25,7 @@ const addAPost = async (req, res) => {
   const post = new StudentPost({
     name,
     subjects,
+    email,
     availability,
     learningGoals,
     budget,

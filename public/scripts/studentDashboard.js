@@ -10,6 +10,7 @@ document
     const formData = {
       name: document.getElementById("name").value,
       subjects: document.getElementById("subjects").value,
+      email: user.email,
       availability: document.getElementById("availability").value,
       learningGoals: document.getElementById("learningGoals").value,
       budget: document.getElementById("budget").value,
@@ -128,4 +129,66 @@ document
 document.getElementById("logout").addEventListener("click", function () {
   localStorage.clear();
   window.location.href = "index.html";
+});
+
+document.addEventListener("DOMContentLoaded", async function () {
+  const studentCards = document.getElementById("studentCards");
+
+  async function fetchStudentRequests() {
+    try {
+      const response = await fetch("http://localhost:3001/api/student");
+
+      if (response.ok) {
+        const students = await response.json();
+        console.log("Students:", students);
+
+        if (students.length > 0) {
+          const userEmail = user.email;
+          const filteredStudents = students.filter(
+            (student) => student.email === userEmail
+          );
+          if (filteredStudents.length > 0) {
+            filteredStudents.forEach((student) => {
+              const studentCard = `
+                              <div class="bg-white text-black p-6 rounded-lg shadow-md hover:bg-gray-100 transition duration-300">
+                                  <h3 class="text-lg font-bold text-gray-800">${
+                                    student.name
+                                  }</h3>
+                                  <p class="text-sm text-gray-600">Subjects: ${
+                                    student.subjects
+                                  }</p>
+                                  <p class="text-sm text-gray-600">Availability: ${
+                                    student.availability
+                                  }</p>
+                                  <p class="text-sm text-gray-600">Learning Goals: ${
+                                    student.learningGoals
+                                  }</p>
+                                  <p class="text-sm text-gray-600">Budget: ${
+                                    student.budget || "N/A"
+                                  }</p>
+                                  <p class="text-sm text-gray-600">Teaching Style: ${
+                                    student.teachingStyle
+                                  }</p>
+                                  <p class="text-sm text-gray-600">Notes: ${
+                                    student.notes || "No additional notes"
+                                  }</p>
+                              </div>
+                          `;
+              studentCards.insertAdjacentHTML("beforeend", studentCard);
+            });
+          } else {
+            studentCards.innerHTML = `<p class="text-red-500 text-center">You have no request</p>`;
+          }
+        } else {
+          studentCards.innerHTML = `<p class="text-red-500 text-center">You have no request</p>`;
+        }
+      } else {
+        alert("Error fetching student requests.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred while fetching student requests.");
+    }
+  }
+  fetchStudentRequests();
 });

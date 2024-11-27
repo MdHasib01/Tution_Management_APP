@@ -79,4 +79,27 @@ const getUsers = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-export { registerUser, signInUser, updateUserPaidStatus, editUser, getUsers };
+const updateUserDetails = async (req, res) => {
+  const { name, email, contactNumber } = req.body;
+  try {
+    const user = await User.findOne({ name });
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+    user.email = email;
+    user.contactNumber = contactNumber;
+    await user.save();
+    res.status(200).send({ message: "User updated successfully" });
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+};
+
+export {
+  registerUser,
+  signInUser,
+  updateUserPaidStatus,
+  editUser,
+  getUsers,
+  updateUserDetails,
+};

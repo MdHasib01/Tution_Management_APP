@@ -5,7 +5,9 @@ const postSchema = new Schema({
     type: String,
     required: true,
   },
-
+  email: {
+    type: String,
+  },
   subjects: {
     type: String,
     required: true,
