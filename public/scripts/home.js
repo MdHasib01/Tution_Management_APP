@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                           student.notes || "No additional notes"
                                         }</p>
                                         ${
-                                          user.paid && user.role === "tutor"
+                                          user?.paid && user?.role === "tutor"
                                             ? `
                  <button
                             class="bg-green-500 text-white py-1 px-2 rounded-md hover:bg-green-600"
@@ -185,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                           teacher.notes || "No additional notes"
                                         }</p>
                                         ${
-                                          user.role === "student"
+                                          user?.role === "student"
                                             ? `
                  <button
                             class="bg-green-500 text-white py-1 px-2 rounded-md hover:bg-green-600"
