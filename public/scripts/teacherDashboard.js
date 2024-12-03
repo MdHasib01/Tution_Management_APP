@@ -1,5 +1,15 @@
 const user = JSON.parse(localStorage.getItem("user"));
-document.getElementById("teacherName").innerHTML = `Welcome ${user.name}`;
+document.getElementById("teacherName").innerHTML = `Welcome ${user.fullName}`;
+document.getElementById("name").value = user.fullName;
+document.getElementById("phone").value = user.phone;
+document.getElementById("email").value = user.email;
+function sendWhatsAppMessage(phone, name) {
+  const encodedMessage = encodeURIComponent(
+    `Hello ${name},\nI would like to discuss opportunities regarding your subject expertise. Please let me know your availability.`
+  );
+  const whatsappUrl = `https://wa.me/${phone}?text=${encodedMessage}`;
+  window.open(whatsappUrl, "_blank"); // Opens WhatsApp in a new tab
+}
 if (!user.paid) {
   document.getElementById("unpaid").classList.remove("hidden");
 } else {
@@ -43,7 +53,18 @@ async function fetchTutorRequests() {
                   <p><strong>Additional Notes:</strong> ${
                     request.notes || "No additional notes"
                   }</p>
-                  <button class="mt-2 bg-blue-500 text-white py-1 px-2 rounded-md hover:bg-blue-600">Respond</button>
+                 ${
+                   user.paid
+                     ? `
+                 <button
+                            class="bg-green-500 text-white py-1 px-2 rounded-md hover:bg-green-600"
+                            onclick="sendWhatsAppMessage('${request.phone}', '${
+                         request.name || "Teacher"
+                       }')">
+                            Message on WhatsApp
+                          </button>`
+                     : ""
+                 }
                 </div>
               `;
           requestsList.insertAdjacentHTML("beforeend", requestCard);
@@ -76,9 +97,9 @@ document.addEventListener("DOMContentLoaded", function () {
     e.preventDefault();
 
     // Collect form data
-    const name = document.getElementById("name").value;
-    const phone = document.getElementById("phone").value;
-    const email = document.getElementById("email").value;
+    const name = user.fullName;
+    const phone = user.phone;
+    const email = user.email;
     const subjectExpertise = document.getElementById("subjectExpertise").value;
     const preferredLocation = document.getElementById("preferedLocation").value;
     const experience = document.getElementById("experience").value;
@@ -125,13 +146,17 @@ document.addEventListener("DOMContentLoaded", function () {
       // Handle the response
       if (response.ok) {
         const result = await response.json();
-        alert("Tuition request submitted successfully!");
+        swal("Success", "Tuition request submitted successfully!", "success");
       } else {
-        alert("Error submitting request. Please try again.");
+        swal("Error", "Error submitting request. Please try again.", "error");
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("An error occurred. Please check the console for more details.");
+      swal(
+        "Error",
+        "An error occurred. Please check the console for more details.",
+        "error"
+      );
     }
   });
 });
@@ -139,9 +164,8 @@ document.addEventListener("DOMContentLoaded", function () {
 //logout
 document.getElementById("logout").addEventListener("click", function () {
   localStorage.clear();
-  window.location.href = "index.html";
+  window.location.href = "login.html";
 });
-
 document.addEventListener("DOMContentLoaded", async function () {
   const studentCards = document.getElementById("studentCards");
 
@@ -171,7 +195,6 @@ document.addEventListener("DOMContentLoaded", async function () {
                                         <p class="text-sm text-gray-600">Availability: ${
                                           teacher.availabilDays
                                         }</p>
-                                       
                                         <p class="text-sm text-gray-600">Budget: ${
                                           teacher.rate || "N/A"
                                         }</p>
@@ -181,6 +204,9 @@ document.addEventListener("DOMContentLoaded", async function () {
                                         <p class="text-sm text-gray-600">Notes: ${
                                           teacher.notes || "No additional notes"
                                         }</p>
+                                        <button class="deleteTeacher bg-red-500 text-white px-2 py-1 my-1 rounded" data-id="${
+                                          teacher._id
+                                        }">Delete</button>
                                     </div>
                                 `;
               studentCards.insertAdjacentHTML("beforeend", studentCard);
@@ -192,12 +218,101 @@ document.addEventListener("DOMContentLoaded", async function () {
           studentCards.innerHTML = `<p class="text-red-500 text-center">You have no request</p>`;
         }
       } else {
-        alert("Error fetching student requests.");
+        swal("Error", "Error fetching student requests.", "error");
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("An error occurred while fetching student requests.");
+      swal(
+        "Error",
+        "An error occurred while fetching student requests.",
+        "error"
+      );
     }
   }
+
+  // Event delegation for delete button
+  studentCards.addEventListener("click", async function (event) {
+    if (event.target.classList.contains("deleteTeacher")) {
+      const teacherId = event.target.getAttribute("data-id");
+      try {
+        const response = await fetch(
+          `http://localhost:3001/api/teacher/${teacherId}`,
+          {
+            method: "DELETE",
+          }
+        );
+        if (response.ok) {
+          swal("Success", "Teacher request deleted successfully.", "success");
+          fetchStudentRequests(); // Refresh the list after deletion
+        } else {
+          swal("Error", "Error deleting teacher request.", "error");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        swal(
+          "Error",
+          "An error occurred while deleting the teacher request.",
+          "error"
+        );
+      }
+    }
+  });
+
   fetchStudentRequests();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Get the user data from localStorage
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  // Populate the form fields with user data
+  if (user) {
+    document.getElementById("profile-name").value = user.name || "";
+    document.getElementById("profile-email").value = user.email || "";
+    document.getElementById("profile-phone").value = user.phone || "";
+    document.getElementById("profile-goals").value = user.goals || "";
+  }
+
+  // Form submission handler
+  const profileForm = document.getElementById("profile-form");
+  profileForm.addEventListener("submit", async (event) => {
+    event.preventDefault(); // Prevent default form submission behavior
+
+    // Collect updated data from the form
+    const updatedUser = {
+      name: document.getElementById("profile-name").value.trim(),
+      email: document.getElementById("profile-email").value.trim(),
+      phone: document.getElementById("profile-phone").value.trim(),
+      goals: document.getElementById("profile-goals").value.trim(),
+    };
+
+    // Make a PUT request to update the user data
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/user/${user._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedUser),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log("Profile updated successfully:", result);
+
+      // Update the user data in localStorage
+      localStorage.setItem("user", JSON.stringify({ ...user, ...updatedUser }));
+
+      swal("Success", "Profile updated successfully!", "success");
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      swal("Error", "Failed to update profile. Please try again.", "error");
+    }
+  });
 });

@@ -1,3 +1,11 @@
+const user = JSON.parse(localStorage.getItem("user"));
+function sendWhatsAppMessage(phone, name) {
+  const encodedMessage = encodeURIComponent(
+    `Hello ${name},\nI would like to discuss opportunities regarding your subject expertise. Please let me know your availability.`
+  );
+  const whatsappUrl = `https://wa.me/${phone}?text=${encodedMessage}`;
+  window.open(whatsappUrl, "_blank"); // Opens WhatsApp in a new tab
+}
 function toggleContactForm() {
   const contactForm = document.getElementById("contact-form");
   contactForm.classList.toggle("hidden");
@@ -52,6 +60,18 @@ document.addEventListener("DOMContentLoaded", function () {
                                         <p class="text-sm text-gray-600">Notes: ${
                                           teacher.notes || "No additional notes"
                                         }</p>
+                                        ${
+                                          user.role === "student"
+                                            ? `
+                 <button
+                            class="bg-green-500 text-white py-1 px-2 rounded-md hover:bg-green-600"
+                            onclick="sendWhatsAppMessage('${teacher.phone}', '${
+                                                teacher.name || "Teacher"
+                                              }')">
+                            Message
+                          </button>`
+                                            : ""
+                                        }
                                     </div>
                                     `;
               teacherCards.insertAdjacentHTML("beforeend", teacherCard);
@@ -105,6 +125,18 @@ document.addEventListener("DOMContentLoaded", function () {
                                         <p class="text-sm text-gray-600">Notes: ${
                                           student.notes || "No additional notes"
                                         }</p>
+                                        ${
+                                          user.paid && user.role === "tutor"
+                                            ? `
+                 <button
+                            class="bg-green-500 text-white py-1 px-2 rounded-md hover:bg-green-600"
+                            onclick="sendWhatsAppMessage('${student.phone}', '${
+                                                student.name || "Teacher"
+                                              }')">
+                            Message
+                          </button>`
+                                            : ""
+                                        }
                                     </div>
                                 `;
             studentCards.insertAdjacentHTML("beforeend", studentCard);
@@ -152,6 +184,18 @@ document.addEventListener("DOMContentLoaded", function () {
                                         <p class="text-sm text-gray-600">Notes: ${
                                           teacher.notes || "No additional notes"
                                         }</p>
+                                        ${
+                                          user.role === "student"
+                                            ? `
+                 <button
+                            class="bg-green-500 text-white py-1 px-2 rounded-md hover:bg-green-600"
+                            onclick="sendWhatsAppMessage('${teacher.phone}', '${
+                                                teacher.name || "Teacher"
+                                              }')">
+                            Message
+                          </button>`
+                                            : ""
+                                        }
                                     </div>
                                 `;
             teacherShowCards.insertAdjacentHTML("beforeend", teacherCard);
@@ -197,7 +241,7 @@ document.addEventListener("DOMContentLoaded", function () {
     dashboardButton.addEventListener("click", function () {
       if (userData.role === "student") {
         window.location.href = "./student_dashboard.html";
-      } else if (userData.role === "teacher") {
+      } else if (userData.role === "tutor") {
         window.location.href = "./teacher_dashboard.html";
       } else if (userData.role === "admin") {
         window.location.href = "./admin_dashboard.html";

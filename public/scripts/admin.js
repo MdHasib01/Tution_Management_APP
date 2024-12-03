@@ -84,13 +84,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
 
       if (response.ok) {
-        alert("Payment approved successfully");
+        swal("Success", "Payment approved successfully", "success");
         loadPaymentTable(); // Refresh the table after approval
       } else {
         console.error("Payment approval failed");
+        swal("Error", "Payment approval failed", "error");
       }
     } catch (error) {
       console.error("Error approving payment:", error);
+      swal("Error", "An error occurred while approving payment", "error");
     }
   }
 
@@ -166,10 +168,35 @@ function populateRespondedTeachersTable(teachers) {
                 }</td>
                 <td class="border px-4 py-2">${teacher.phone || "N/A"}</td>
                 <td class="border px-4 py-2">${teacher.rate || "N/A"}</td>
+                <td class="border px-4 py-2">${
+                  teacher.respondedUser || "N/A"
+                }</td>
+                <td class="border px-4 py-2">
+                    ${
+                      teacher.phone
+                        ? `<button
+                            class="bg-green-500 text-white py-1 px-2 rounded-md hover:bg-green-600"
+                            onclick="sendWhatsAppMessage('${teacher.phone}', '${
+                            teacher.name || "Teacher"
+                          }')">
+                            Message on WhatsApp
+                          </button>`
+                        : "N/A"
+                    }
+                </td>
             </tr>
         `;
     tableBody.insertAdjacentHTML("beforeend", row);
   });
+}
+
+// Function to send a WhatsApp message
+function sendWhatsAppMessage(phone, name) {
+  const encodedMessage = encodeURIComponent(
+    `Hello ${name},\nI would like to discuss opportunities regarding your subject expertise. Please let me know your availability.`
+  );
+  const whatsappUrl = `https://wa.me/${phone}?text=${encodedMessage}`;
+  window.open(whatsappUrl, "_blank"); // Opens WhatsApp in a new tab
 }
 
 // Initialize fetch on page load
@@ -177,5 +204,65 @@ document.addEventListener("DOMContentLoaded", fetchRespondedTeachers);
 
 // Logout button functionality
 document.getElementById("logoutBtn").addEventListener("click", function () {
-  window.location.href = "index.html"; // Redirect to the homepage or logout URL
+  window.location.href = "login.html"; // Redirect to the homepage or logout URL
 });
+
+let allUsers = []; // To store all fetched users for search functionality
+
+// Fetch user data from the API
+async function fetchUserData() {
+  try {
+    const response = await fetch("http://localhost:3001/api/user/");
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    allUsers = await response.json(); // Store users for search
+    renderTable(allUsers);
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+  }
+}
+
+// Render table rows
+function renderTable(users) {
+  const tableBody = document.getElementById("user-table-body");
+  tableBody.innerHTML = ""; // Clear existing rows
+
+  users.forEach((user) => {
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+                <td class="border px-4 py-2">${user.name}</td>
+                <td class="border px-4 py-2">${user.role}</td>
+                <td class="border px-4 py-2">${user.email}</td>
+                <td class="border px-4 py-2">
+                    <button class="bg-green-500 text-white py-1 px-2 rounded-md hover:bg-green-600" 
+                        onclick="openMailApp('${user.email}')">Message</button>
+                </td>
+            `;
+
+    tableBody.appendChild(row);
+  });
+}
+
+// Filter users by name
+function filterUsersByName(searchText) {
+  const filteredUsers = allUsers.filter((user) =>
+    user.name.toLowerCase().includes(searchText.toLowerCase())
+  );
+  renderTable(filteredUsers);
+}
+
+// Function to open the default mail app
+function openMailApp(email) {
+  window.location.href = `mailto:${email}`;
+}
+
+// Event listener for the search box
+document.getElementById("search-box").addEventListener("input", (event) => {
+  const searchText = event.target.value;
+  filterUsersByName(searchText);
+});
+
+// Fetch data on page load
+document.addEventListener("DOMContentLoaded", fetchUserData);

@@ -32,7 +32,7 @@ document.querySelector(".login form").onsubmit = async (e) => {
       localStorage.setItem("user", JSON.stringify(data.user));
 
       console.log(data.user);
-      alert("Login successful");
+      swal("Success", "Login successful", "success");
       login_btn.innerText = "Login";
       if (data.user.role === "admin") {
         window.location.href = "admin_dashboard.html";
@@ -45,7 +45,7 @@ document.querySelector(".login form").onsubmit = async (e) => {
     .catch((err) => {
       console.log(err);
       login_btn.innerText = "Login";
-      alert("Login failed");
+      swal("Error", "Login failed", "error");
     });
 };
 
@@ -53,7 +53,9 @@ document.querySelector(".register form").onsubmit = async (e) => {
   e.preventDefault();
   const signup_btn = document.getElementById("signupBtn");
   signup_btn.innerText = "Loading...";
+  const signup_fullname = document.getElementById("signup_fullname").value;
   const signup_username = document.getElementById("signup_username").value;
+  const signup_phone = document.getElementById("signup_phone").value;
   const email = document.getElementById("email").value;
   const signup_password = document.getElementById("signup_password").value;
   const role = document.getElementById("role").value;
@@ -64,37 +66,36 @@ document.querySelector(".register form").onsubmit = async (e) => {
   success_msg.innerHTML = "";
   error_msg.innerHTML = "";
 
-  console.log(
-    JSON.stringify({
-      name: signup_username,
-      email: email,
-      password: signup_password,
-      role: role,
-    })
-  );
-  const response = await fetch(`${serverUrl}/user/register`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name: signup_username,
-      email: email,
-      password: signup_password,
-      role: role,
-    }),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-      success_msg.innerHTML = `<p>Account Created Successfully!</p>`;
-      signup_btn.innerText = "Sign Up";
-      wrapper.classList.remove("active");
-      success_msg.innerHTML = ``;
-    })
-    .catch((err) => {
-      console.log(`Account creation unseccessfull!!\nError: ${err.message}`);
-      error_msg.innerHTML = `<p>Account creation unsuccessful!</p>`;
-      signup_btn.innerText = "Sign Up";
+  try {
+    const response = await fetch(`${serverUrl}/user/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fullName: signup_fullname,
+        name: signup_username,
+        email: email,
+        phone: signup_phone,
+        password: signup_password,
+        role: role,
+      }),
     });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(data);
+    swal("Success", "Account Created Successfully!", "success");
+    signup_btn.innerText = "Sign Up";
+    wrapper.classList.remove("active");
+    success_msg.innerHTML = ``;
+  } catch (error) {
+    console.log(`Account creation unsuccessful!!\nError: ${error.message}`);
+    error_msg.innerHTML = `<p>Account creation unsuccessful!</p>`;
+    signup_btn.innerText = "Sign Up";
+    swal("Error", "Account creation unsuccessful!", "error");
+  }
 };

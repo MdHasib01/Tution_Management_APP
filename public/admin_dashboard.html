@@ -88,39 +88,36 @@
         </section>
 
         <!-- Other Sections... -->
-        <section id="user-management" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4 text-cyan-50  ">User Management</h2>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <table class="min-w-full table-auto">
-                    <thead>
-                        <tr>
-                            <th class="px-4 py-2">Name</th>
-                            <th class="px-4 py-2">Role</th>
-                            <th class="px-4 py-2">Email</th>
-                            <th class="px-4 py-2">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="border px-4 py-2">Raihan</td>
-                            <td class="border px-4 py-2">Student</td>
-                            <td class="border px-4 py-2">raihan@example.com</td>
-                            <td class="border px-4 py-2">
-                                <button class="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-600">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border px-4 py-2">Karim</td>
-                            <td class="border px-4 py-2">Tutor</td>
-                            <td class="border px-4 py-2">karim@example.com</td>
-                            <td class="border px-4 py-2">
-                                <button class="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-600">Delete</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+       <section id="user-management" class="mb-8">
+    <h2 class="text-2xl font-bold mb-4 text-cyan-50">User Message</h2>
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <!-- Search Box -->
+        <div class="mb-4">
+            <input
+                type="text"
+                id="search-box"
+                placeholder="Search by User name"
+                class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            />
+        </div>
+
+        <!-- User Table -->
+        <table class="min-w-full table-auto">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2">Name</th>
+                    <th class="px-4 py-2">Role</th>
+                    <th class="px-4 py-2">Email</th>
+                    <th class="px-4 py-2">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="user-table-body">
+                <!-- Data will be dynamically inserted here -->
+            </tbody>
+        </table>
+    </div>
+</section>
+
 
         <section id="requests" class="mb-8">
             <h2 class="text-2xl font-bold mb-4 text-cyan-50  ">Tutor payment approve </h2>
@@ -157,6 +154,7 @@
                             <th class="px-4 py-2">Preferred Location</th>
                             <th class="px-4 py-2">Contact</th>
                             <th class="px-4 py-2">Rate</th>
+                            <th class="px-4 py-2">Responded User</th>
                         </tr>
                     </thead>
                     <tbody id="respondedTeachersTableBody">

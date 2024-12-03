@@ -2,7 +2,7 @@ import { User } from "../model/user.model.js";
 import bcrypt from "bcrypt";
 
 const registerUser = async (req, res) => {
-  const { name, email, password, role } = req.body;
+  const { fullName, phone, name, email, password, role } = req.body;
   try {
     if (!name || !email || !password) {
       return res.status(400).send({ error: "All fields are required" });
@@ -13,8 +13,10 @@ const registerUser = async (req, res) => {
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({
+      fullName: fullName,
       name,
       email,
+      phone,
       password: hashedPassword,
       role,
     });
@@ -42,12 +44,15 @@ const signInUser = async (req, res) => {
 };
 
 const editUser = async (req, res) => {
-  const { name, email, password, role } = req.body;
+  const { fullName, name, email, phone, password, role } = req.body;
   try {
     const user = await User.findOne({ name });
     if (!user) {
       return res.status(404).send("User not found");
     }
+    user.fullName = fullName;
+    user.name = name;
+    user.phone = phone;
     user.email = email;
     user.password = password;
     user.role = role;
@@ -80,14 +85,18 @@ const getUsers = async (req, res) => {
   }
 };
 const updateUserDetails = async (req, res) => {
-  const { name, email, contactNumber } = req.body;
+  const { fullName, name, email, phone, learningGoal } = req.body;
   try {
     const user = await User.findOne({ name });
     if (!user) {
       return res.status(404).send("User not found");
     }
+    user.fullName = fullName;
+    user.phone = phone;
+    user.name = name;
+    user.learningGoal = learningGoal;
     user.email = email;
-    user.contactNumber = contactNumber;
+    user.phone = phone;
     await user.save();
     res.status(200).send({ message: "User updated successfully" });
   } catch (error) {

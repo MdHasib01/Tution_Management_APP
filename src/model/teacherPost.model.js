@@ -4,6 +4,7 @@ const teacherPostSchema = new Schema({
   name: {
     type: String,
   },
+  respondedUser: { type: String },
   phone: {
     type: String,
   },

@@ -5,7 +5,15 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  fullName: {
+    type: String,
+    required: true,
+  },
   email: {
+    type: String,
+    required: true,
+  },
+  phone: {
     type: String,
     required: true,
   },
@@ -21,6 +29,8 @@ const userSchema = new Schema({
     type: String,
     default: "student",
   },
+  phone: { type: String },
+  learningGoal: { type: String },
 });
 
 export const User = model("User", userSchema);

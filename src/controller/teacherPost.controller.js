@@ -48,6 +48,7 @@ const updateResponse = async (req, res) => {
   try {
     const post = await TeacherPost.findById(id);
     post.response = true;
+    post.respondedUser = req.body.respondedUser;
     post.save();
     res.status(200).json(post);
   } catch (err) {
@@ -64,7 +65,21 @@ const findResponseTure = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+const deletePost = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deletedPost = await TeacherPost.findByIdAndDelete(id);
+    if (!deletedPost) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+    res.status(200).json({ message: "Post deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export {
+  deletePost,
   addTeacherPost,
   getTeacherPosts,
   getPostsByLocation,

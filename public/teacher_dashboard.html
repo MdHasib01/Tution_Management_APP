@@ -42,6 +42,7 @@
               <input
                 type="text"
                 id="name"
+                disabled
                 placeholder="Tutor's Name"
                 class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 required
@@ -53,6 +54,7 @@
               <input
                 type="tel"
                 id="phone"
+                disabled
                 placeholder="Phone"
                 class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 required
@@ -64,6 +66,7 @@
               <input
                 type="email"
                 id="email"
+                disabled
                 placeholder="Email"
                 class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 required
@@ -275,66 +278,79 @@
         </div>
       </section>
 
-      <section id="profile-update" class="mb-8">
-        <h2 class="text-2xl font-bold mb-4">Update Your Profile</h2>
-        <form action="/update-profile" method="POST" id="profile-update-form">
-          <input type="hidden" name="role" value="tutor" />
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label
-                for="update-name"
-                class="block text-sm font-medium text-gray-700"
-                >Your Name</label
-              >
-              <input
-                type="text"
-                name="name"
-                id="update-name"
-                required
-                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              />
+      <section id="profile" class="mb-8">
+        <h2 class="text-2xl font-bold mb-4">Profile Management</h2>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <form id="profile-form">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label
+                  for="profile-name"
+                  class="block text-sm font-medium text-gray-700"
+                  >Name</label
+                >
+                <input
+                  type="text"
+                  id="profile-name"
+                  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  for="profile-email"
+                  class="block text-sm font-medium text-gray-700"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  id="profile-email"
+                  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  for="profile-phone"
+                  class="block text-sm font-medium text-gray-700"
+                  >Phone</label
+                >
+                <input
+                  type="tel"
+                  id="profile-phone"
+                  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+              </div>
+              <div>
+                <label
+                  for="learning-goals"
+                  class="block text-sm font-medium text-gray-700"
+                  >Learning Goals</label
+                >
+                <textarea
+                  id="profile-goals"
+                  rows="3"
+                  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                ></textarea>
+              </div>
             </div>
-            <div>
-              <label
-                for="update-email"
-                class="block text-sm font-medium text-gray-700"
-                >Email</label
-              >
-              <input
-                type="email"
-                name="email"
-                id="update-email"
-                required
-                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              />
-            </div>
-            <div>
-              <label
-                for="update-contact"
-                class="block text-sm font-medium text-gray-700"
-                >Contact Number</label
-              >
-              <input
-                type="text"
-                name="contactNumber"
-                id="update-contact"
-                required
-                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              />
-            </div>
-          </div>
-          <button
-            type="submit"
-            class="mt-4 bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600"
-          >
-            Update Profile
-          </button>
-        </form>
+            <button
+              type="submit"
+              class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+            >
+              Update Profile
+            </button>
+          </form>
+        </div>
       </section>
     </main>
 
     <script src="./scripts/teacherDashboard.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+      integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
   </body>
 </html>
-
-/****** bd37d86c-c815-452a-b9d3-daf97569bf20 *******/

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Student Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   </head>
   <body class="bg-gray-100">
     <nav class="bg-blue-500 p-4 text-white">
@@ -42,6 +43,7 @@
               <input
                 type="text"
                 id="name"
+                disabled
                 name="name"
                 placeholder="Enter your name"
                 required
@@ -154,7 +156,7 @@
           <!-- Submit Button -->
           <div>
             <button
-              type="submit"
+              id="submitReq"
               class="w-[200px] bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300"
             >
               Submit Request
@@ -162,11 +164,10 @@
           </div>
         </form>
       </section>
-      
 
       <section id="request-status" class="mb-8">
         <h2 class="text-2xl font-bold mb-4">My Requests</h2>
-         <div
+        <div
           id="studentCards"
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
         >
@@ -379,5 +380,17 @@
       </section>
     </main>
     <script src="./scripts/studentDashboard.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+      integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+      integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
   </body>
 </html>
